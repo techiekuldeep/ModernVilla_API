@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
+using ModernVilla_VillaAPI.Data;
 using ModernVilla_VillaAPI.Models;
 using ModernVilla_VillaAPI.Models.Dto;
 
@@ -13,10 +14,7 @@ namespace ModernVilla_VillaAPI.Controllers
         [HttpGet]
         public IEnumerable<VillaDTO> GetVillas()
         {
-            return new List<VillaDTO>{
-                new VillaDTO{Id=1, Name = "Pool View" },
-                new VillaDTO{Id=2, Name = "Beach View" }
-            };
+            return VillaStore.villaList;
         }
     }
 }
