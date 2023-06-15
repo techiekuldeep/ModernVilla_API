@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+
+using ModernVilla_VillaAPI.Data;
 using ModernVilla_VillaAPI.Logging;
 
 using Serilog;
@@ -5,6 +8,10 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<ApplicationDbContext>(option =>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
+});
 
 //Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
 //    .WriteTo.File("log/villaLogs.txt",rollingInterval:RollingInterval.Day).CreateLogger();
