@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 using ModernVilla_VillaAPI.Data;
+using ModernVilla_VillaAPI.Logging;
 using ModernVilla_VillaAPI.Models;
 using ModernVilla_VillaAPI.Models.Dto;
 
@@ -12,17 +13,27 @@ namespace ModernVilla_VillaAPI.Controllers
     [ApiController]
     public class VillaAPIController:ControllerBase
     {
-        private readonly ILogger<VillaAPIController> _logger;
+        //private readonly ILogger<VillaAPIController> _logger;
+        private readonly ILogging _logger;
 
-        public VillaAPIController(ILogger<VillaAPIController> logger)
+        //Default Logging
+        //public VillaAPIController(ILogger<VillaAPIController> logger)
+        //{
+        //    _logger = logger;
+        //}
+        //Custom Logging
+        public VillaAPIController(ILogging logger)
         {
             _logger = logger;
         }
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<VillaDTO> GetVillas()
-        {
-            _logger.LogInformation("Getting all villas");
+        {    //Default Logging
+            //_logger.LogInformation("Getting all villas");
+            //Custom Logging
+            _logger.Log("Getting all villas", "");
             return Ok(VillaStore.villaList);
         }
 
@@ -35,7 +46,10 @@ namespace ModernVilla_VillaAPI.Controllers
         { 
             if(id == 0)
             {
-                _logger.LogInformation("Getting Villa Error with id " + id);
+                //Default Logging
+                //_logger.LogInformation("Getting Villa Error with id " + id);
+                //Custom Logging
+                _logger.Log("Getting Villa Error with id " + id, "error");
                 return BadRequest();
             }
             var villa = VillaStore.villaList.FirstOrDefault(u => u.Id == id);
