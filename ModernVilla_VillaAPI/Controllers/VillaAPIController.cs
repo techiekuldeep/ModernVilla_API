@@ -18,7 +18,7 @@ namespace ModernVilla_VillaAPI.Controllers
             return Ok(VillaStore.villaList);
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name = "GetVilla")]
         //[ProducesResponseType(200, Type =typeof(VillaDTO))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -53,7 +53,9 @@ namespace ModernVilla_VillaAPI.Controllers
             }
             villaDTO.Id = VillaStore.villaList.OrderByDescending(u => u.Id).FirstOrDefault().Id +1;
             VillaStore.villaList.Add(villaDTO);
-            return Ok(villaDTO);
+
+            //return Ok(villaDTO);
+            return CreatedAtRoute("GetVilla", new { id= villaDTO.Id},villaDTO);
         }
 
     }
