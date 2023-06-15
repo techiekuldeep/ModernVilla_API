@@ -13,27 +13,27 @@ namespace ModernVilla_VillaAPI.Controllers
     [ApiController]
     public class VillaAPIController:ControllerBase
     {
-        //private readonly ILogger<VillaAPIController> _logger;
-        private readonly ILogging _logger;
+        private readonly ILogger<VillaAPIController> _logger;
+        //private readonly ILogging _logger;
 
         //Default Logging
-        //public VillaAPIController(ILogger<VillaAPIController> logger)
-        //{
-        //    _logger = logger;
-        //}
-        //Custom Logging
-        public VillaAPIController(ILogging logger)
+        public VillaAPIController(ILogger<VillaAPIController> logger)
         {
             _logger = logger;
         }
+        //Custom Logging
+        //public VillaAPIController(ILogging logger)
+        //{
+        //    _logger = logger;
+        //}
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<VillaDTO> GetVillas()
         {    //Default Logging
-            //_logger.LogInformation("Getting all villas");
+            _logger.LogInformation("Getting all villas");
             //Custom Logging
-            _logger.Log("Getting all villas", "");
+            //_logger.Log("Getting all villas", "");
             return Ok(VillaStore.villaList);
         }
 
@@ -47,9 +47,9 @@ namespace ModernVilla_VillaAPI.Controllers
             if(id == 0)
             {
                 //Default Logging
-                //_logger.LogInformation("Getting Villa Error with id " + id);
+                _logger.LogInformation("Getting Villa Error with id " + id);
                 //Custom Logging
-                _logger.Log("Getting Villa Error with id " + id, "error");
+                //_logger.Log("Getting Villa Error with id " + id, "error");
                 return BadRequest();
             }
             var villa = VillaStore.villaList.FirstOrDefault(u => u.Id == id);
