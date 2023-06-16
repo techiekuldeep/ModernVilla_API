@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using ModernVilla_VillaAPI;
 using ModernVilla_VillaAPI.Data;
 using ModernVilla_VillaAPI.Logging;
+using ModernVilla_VillaAPI.Repository;
+using ModernVilla_VillaAPI.Repository.IRepository;
 
 using Serilog;
 
@@ -13,6 +15,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 });
+//added Villa repositorty
+builder.Services.AddScoped<IVillaRepository, VillaRepository>();
 //Mapping Config
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 //Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
