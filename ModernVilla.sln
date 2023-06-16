@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModernVilla_VillaAPI", "Mod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernVilla_Web", "ModernVilla_Web\ModernVilla_Web.csproj", "{B9B6F175-694B-4FA0-A8B5-9E1DB8D56459}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernVilla_Utility", "ModernVilla_Utility\ModernVilla_Utility.csproj", "{A2E344BE-C0A2-48EF-B2EE-302B0C46CCC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B9B6F175-694B-4FA0-A8B5-9E1DB8D56459}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9B6F175-694B-4FA0-A8B5-9E1DB8D56459}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9B6F175-694B-4FA0-A8B5-9E1DB8D56459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2E344BE-C0A2-48EF-B2EE-302B0C46CCC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2E344BE-C0A2-48EF-B2EE-302B0C46CCC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2E344BE-C0A2-48EF-B2EE-302B0C46CCC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2E344BE-C0A2-48EF-B2EE-302B0C46CCC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
