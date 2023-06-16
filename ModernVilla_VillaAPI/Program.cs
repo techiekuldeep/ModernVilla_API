@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
+using ModernVilla_VillaAPI;
 using ModernVilla_VillaAPI.Data;
 using ModernVilla_VillaAPI.Logging;
 
@@ -12,7 +13,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 });
-
+//Mapping Config
+builder.Services.AddAutoMapper(typeof(MappingConfig));
 //Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
 //    .WriteTo.File("log/villaLogs.txt",rollingInterval:RollingInterval.Day).CreateLogger();
 
