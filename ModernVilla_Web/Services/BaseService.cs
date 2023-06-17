@@ -15,7 +15,7 @@ namespace ModernVilla_Web.Services
     {
         public APIResponse responseModel { get;set; }
         public IHttpClientFactory httpClient { get; set; }
-        public BaseService()
+        public BaseService(IHttpClientFactory httpClient)
         {
             this.responseModel = new();
             this.httpClient = httpClient;

@@ -1,6 +1,13 @@
-﻿namespace ModernVilla_Web.Services.IServices
+﻿using ModernVilla_Web.Models.Dto;
+
+namespace ModernVilla_Web.Services.IServices
 {
-    public class IVillaService
+    public interface IVillaService
     {
+        Task<T> GetAllAsync<T>();
+        Task<T> GetAsync<T>(int id);
+        Task<T> CreateAsync<T>(VillaCreateDTO dto);
+        Task<T> UpdateAsync<T>(VillaUpdateDTO dto);
+        Task<T> DeleteAsync<T>(int id);
     }
 }
