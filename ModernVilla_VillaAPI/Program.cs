@@ -5,8 +5,12 @@ using ModernVilla_VillaAPI.Data;
 using ModernVilla_VillaAPI.Logging;
 using ModernVilla_VillaAPI.Repository;
 using ModernVilla_VillaAPI.Repository.IRepository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using Serilog;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,8 +25,25 @@ builder.Services.AddScoped<IVillaNumberRepository, VillaNumberRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 //Mapping Config
 builder.Services.AddAutoMapper(typeof(MappingConfig));
+
+var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
 //Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
 //    .WriteTo.File("log/villaLogs.txt",rollingInterval:RollingInterval.Day).CreateLogger();
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    }).AddJwtBearer(x => {
+        x.RequireHttpsMetadata = false;
+        x.SaveToken = true;
+        x.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+});
 
 //builder.Host.UseSerilog();
 
@@ -46,7 +67,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
