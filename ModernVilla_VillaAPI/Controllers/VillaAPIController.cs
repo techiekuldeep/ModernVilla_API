@@ -12,6 +12,7 @@ using ModernVilla_VillaAPI.Models.Dto;
 using ModernVilla_VillaAPI.Repository.IRepository;
 
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ModernVilla_VillaAPI.Controllers
 {
@@ -31,6 +32,7 @@ namespace ModernVilla_VillaAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetVillas()
         {
@@ -50,6 +52,7 @@ namespace ModernVilla_VillaAPI.Controllers
             return _response;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet("{id:int}", Name = "GetVilla")]
         //[ProducesResponseType(200, Type =typeof(VillaDTO))]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -88,6 +91,7 @@ namespace ModernVilla_VillaAPI.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        
         public async Task<ActionResult<APIResponse>> CreateVilla([FromBody] VillaCreateDTO createDTO)
         {
             try
@@ -134,6 +138,7 @@ namespace ModernVilla_VillaAPI.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "CUSTOM")]
         public async Task<ActionResult<APIResponse>> DeleteVilla(int id)
         {
             try
