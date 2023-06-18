@@ -1,7 +1,13 @@
-﻿using ModernVilla_VillaAPI.Data;
+﻿using Microsoft.IdentityModel.Tokens;
+
+using ModernVilla_VillaAPI.Data;
 using ModernVilla_VillaAPI.Models;
 using ModernVilla_VillaAPI.Models.Dto;
 using ModernVilla_VillaAPI.Repository.IRepository;
+
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace ModernVilla_VillaAPI.Repository
 {
@@ -35,6 +41,26 @@ namespace ModernVilla_VillaAPI.Repository
             }
 
             //if user was found generate JWT Token
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(secretKey);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    new Claim(ClaimTypes.Role, user.Role)
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            LoginResponseDTO loginResponseDTO = new LoginResponseDTO()
+            {
+                Token = tokenHandler.WriteToken(token),
+                User = user
+            };
+            return loginResponseDTO;
         }
 
         public async Task<LocalUser> Register(RegisterationRequestDTO registerationRequestDTO)
