@@ -18,6 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 //added Villa repositorty
 builder.Services.AddScoped<IVillaRepository, VillaRepository>();
 builder.Services.AddScoped<IVillaNumberRepository, VillaNumberRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 //Mapping Config
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 //Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
