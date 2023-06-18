@@ -100,7 +100,7 @@ namespace ModernVilla_VillaAPI.Controllers
                 //Custom validation to check if villa name is unique
                 if (await _dbVilla.GetAsync(u => u.Name.ToLower() == createDTO.Name.ToLower()) != null)
                 {
-                    ModelState.AddModelError("CustomError", "Villa already Exists!");
+                    ModelState.AddModelError("ErrorMessages", "Villa already Exists!");
                     return BadRequest(ModelState);
                 }
                 if (createDTO == null)
