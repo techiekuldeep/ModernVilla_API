@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using ModernVilla_Web.Models;
@@ -9,6 +10,7 @@ using ModernVilla_Web.Services.IServices;
 using Newtonsoft.Json;
 
 using System.Collections.Generic;
+using System.Data;
 using System.Reflection;
 
 namespace ModernVilla_Web.Controllers
@@ -34,11 +36,13 @@ namespace ModernVilla_Web.Controllers
 
             return View(list);
         }
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CreateVilla()
         {
             
             return View();
         }
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateVilla(VillaCreateDTO model)
@@ -55,6 +59,8 @@ namespace ModernVilla_Web.Controllers
             TempData["error"] = "Error encountered.";
             return View(model);
         }
+
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdateVilla(int villaId)
         {
             var response = await _villaService.GetAsync<APIResponse>(villaId);
@@ -66,6 +72,8 @@ namespace ModernVilla_Web.Controllers
             }
             return NotFound();
         }
+
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateVilla(VillaUpdateDTO model)
@@ -82,6 +90,8 @@ namespace ModernVilla_Web.Controllers
             TempData["error"] = "Error encountered.";
             return View(model);
         }
+
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteVilla(int villaId)
         {
             var response = await _villaService.GetAsync<APIResponse>(villaId);
@@ -92,6 +102,8 @@ namespace ModernVilla_Web.Controllers
             }
             return NotFound();
         }
+
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteVilla(VillaDTO model)

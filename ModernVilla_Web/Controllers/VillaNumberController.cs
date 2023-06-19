@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ModernVilla_Web.Models;
@@ -11,6 +12,7 @@ using ModernVilla_Web.Services.IServices;
 using Newtonsoft.Json;
 
 using System.Collections.Generic;
+using System.Data;
 
 namespace ModernVilla_Web.Controllers
 {
@@ -36,6 +38,8 @@ namespace ModernVilla_Web.Controllers
 
             return View(list);
         }
+
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CreateVillaNumber()
         {
             VillaNumberCreateVM villaNumberVM = new();
@@ -51,6 +55,8 @@ namespace ModernVilla_Web.Controllers
             }
             return View(villaNumberVM);
         }
+
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateVillaNumber(VillaNumberCreateVM model)
@@ -82,6 +88,8 @@ namespace ModernVilla_Web.Controllers
             }
             return View(model);
         }
+
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdateVillaNumber(int villaNo)
         {
             VillaNumberUpdateVM villaNumberVM = new();
@@ -107,6 +115,8 @@ namespace ModernVilla_Web.Controllers
 
             return NotFound();
         }
+
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateVillaNumber(VillaNumberUpdateVM model)
@@ -140,6 +150,8 @@ namespace ModernVilla_Web.Controllers
             }
             return View(model);
         }
+
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteVillaNumber(int villaNo)
         {
             VillaNumberDeleteVM villaNumberVM = new();
@@ -166,6 +178,7 @@ namespace ModernVilla_Web.Controllers
             return NotFound();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteVillaNumber(VillaNumberDeleteVM model)
