@@ -18,8 +18,11 @@ using System.Data;
 namespace ModernVilla_VillaAPI.Controllers
 {
     //[Route("api/[controller]")]
-    [Route("api/VillaNumberAPI")]
+    //[Route("api/VillaNumberAPI")]
+    [Route("api/v{version:apiVersion}/VillaNumberAPI")]
     [ApiController]
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     public class VillaNumberAPIController : ControllerBase
     {
         protected APIResponse _response;
@@ -33,7 +36,7 @@ namespace ModernVilla_VillaAPI.Controllers
             this._response = new();
             _dbVilla = dbVilla;
         }
-
+        [MapToApiVersion("1.0")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetVillaNumbers()
@@ -53,6 +56,14 @@ namespace ModernVilla_VillaAPI.Controllers
             }
             return _response;
         }
+
+        [MapToApiVersion("2.0")]
+        [HttpGet]
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
+
 
         [HttpGet("{id:int}", Name = "GetVillaNumber")]
         [ProducesResponseType(StatusCodes.Status200OK)]

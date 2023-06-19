@@ -30,6 +30,10 @@ builder.Services.AddApiVersioning(options => {
     options.AssumeDefaultVersionWhenUnspecified = true;
     options.DefaultApiVersion = new ApiVersion(1, 0);
 });
+builder.Services.AddVersionedApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+});
 
 var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
 //Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
