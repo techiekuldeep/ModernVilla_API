@@ -12,6 +12,8 @@ using ModernVilla_VillaAPI.Models.Dto;
 using ModernVilla_VillaAPI.Repository.IRepository;
 
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ModernVilla_VillaAPI.Controllers
 {
@@ -85,6 +87,7 @@ namespace ModernVilla_VillaAPI.Controllers
 
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -133,6 +136,7 @@ namespace ModernVilla_VillaAPI.Controllers
 
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id:int}", Name = "DeleteVillaNumber")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -166,6 +170,7 @@ namespace ModernVilla_VillaAPI.Controllers
 
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut("{id:int}", Name = "UpdateVillaNumber")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

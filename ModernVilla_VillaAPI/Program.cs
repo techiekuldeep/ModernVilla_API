@@ -6,7 +6,7 @@ using ModernVilla_VillaAPI.Logging;
 using ModernVilla_VillaAPI.Repository;
 using ModernVilla_VillaAPI.Repository.IRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
@@ -26,6 +26,10 @@ builder.Services.AddScoped<IVillaNumberRepository, VillaNumberRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 //Mapping Config
 builder.Services.AddAutoMapper(typeof(MappingConfig));
+builder.Services.AddApiVersioning(options => {
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+});
 
 var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
 //Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()

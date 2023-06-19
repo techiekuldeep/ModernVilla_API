@@ -2,6 +2,8 @@
 
 using Microsoft.AspNetCore.Mvc;
 
+using ModernVilla_Utility;
+
 using ModernVilla_Web.Models;
 using ModernVilla_Web.Models.Dto;
 using ModernVilla_Web.Services.IServices;
@@ -25,7 +27,7 @@ namespace ModernVilla_Web.Controllers
         public async Task<IActionResult> Index()
         {
             List<VillaDTO> list = new();
-            var response = await _villaService.GetAllAsync<APIResponse>();
+            var response = await _villaService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (response != null && response.IsSuccess)
             {
                 list = JsonConvert.DeserializeObject<List<VillaDTO>>(Convert.ToString(response.Result));
