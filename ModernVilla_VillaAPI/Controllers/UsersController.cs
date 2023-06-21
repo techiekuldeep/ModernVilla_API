@@ -8,12 +8,12 @@ using ModernVilla_VillaAPI.Repository.IRepository;
 
 using System.Net;
 
-namespace ModernVilla_VillaAPI.Controllers.v1
+namespace ModernVilla_VillaAPI.Controllers
 {
     //[Route("api/UsersAuth")]
     [Route("api/v{version:apiVersion}/UsersAuth")]
     [ApiController]
-    [ApiVersion("1.0")]
+    [ApiVersionNeutral]
     public class UsersController : Controller
     {
         private readonly IUserRepository _userRepo;
