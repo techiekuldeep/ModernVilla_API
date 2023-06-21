@@ -8,7 +8,7 @@ using ModernVilla_VillaAPI.Repository.IRepository;
 
 using System.Net;
 
-namespace ModernVilla_VillaAPI.Controllers
+namespace ModernVilla_VillaAPI.Controllers.v1
 {
     //[Route("api/UsersAuth")]
     [Route("api/v{version:apiVersion}/UsersAuth")]
@@ -21,7 +21,7 @@ namespace ModernVilla_VillaAPI.Controllers
         public UsersController(IUserRepository userRepo)
         {
             _userRepo = userRepo;
-            this._response = new();
+            _response = new();
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO model)
