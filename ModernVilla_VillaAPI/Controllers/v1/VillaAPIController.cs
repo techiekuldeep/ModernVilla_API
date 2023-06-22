@@ -13,6 +13,7 @@ using ModernVilla_VillaAPI.Repository.IRepository;
 
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.Json;
 
 namespace ModernVilla_VillaAPI.Controllers.v1
 {
@@ -59,6 +60,9 @@ namespace ModernVilla_VillaAPI.Controllers.v1
                 {
                     villaList = villaList.Where(u => u.Name.ToLower().Contains(search));
                 }
+                Pagination pagination = new() { PageNumber = pageNumber, PageSize = pageSize };
+
+                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagination));
                 _response.Result = _mapper.Map<List<VillaDTO>>(villaList);
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
