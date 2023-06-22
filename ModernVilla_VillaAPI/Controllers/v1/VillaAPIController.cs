@@ -34,6 +34,7 @@ namespace ModernVilla_VillaAPI.Controllers.v1
         }
 
         [HttpGet]
+        [ResponseCache(Duration = 30)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -57,6 +58,7 @@ namespace ModernVilla_VillaAPI.Controllers.v1
 
 
         [HttpGet("{id:int}", Name = "GetVilla")]
+        [ResponseCache(Duration = 30)]
         //[ProducesResponseType(200, Type =typeof(VillaDTO))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
